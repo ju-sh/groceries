@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groceries</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+ 
+  <!-- <\!-- Hamburger Menu Button -\-> -->
+  <!-- <div class="menu-toggle" id="menu-toggle"> -->
+  <!--     <div class="bar"></div> -->
+  <!--     <div class="bar"></div> -->
+  <!--     <div class="bar"></div> -->
+  <!-- </div> -->
+  
+  <!-- <\!-- Navigation Menu -\-> -->
+  <!-- <nav id="nav"> -->
+  <!--     <ul> -->
+  <!--         <li><a href="#പച്ചക്കറികള്‍">പച്ചക്കറികള്‍</a></li> -->
+  <!--         <li><a href="#പലചരക്ക്">പലചരക്ക്</a></li> -->
+  <!--         <li><a href="#വ്യഞ്ചനങ്ങള്‍">വ്യഞ്ചനങ്ങള്</a></li> -->
+  <!--     </ul> -->
+  <!-- </nav> -->
+ 
+
+  <button id="btn-show-modal" form="the-form" type="submit">
+      Generate list
+  </button>
+
+  <main>
+  <form id="the-form">
+      <!-- <button type="button" commandfor="modal-box" command="show-modal"> -->
+
+      <table id="the-table">
+          <!-- JS will fill here -->
+      </table>
+
+      <dialog id="modal-box">
+          <textarea id="output" readonly>
+              <!-- JS will fill here -->
+          </textarea>
+
+          <div class="buttons">
+              <button id="btn-copy" type="button" autofocus>
+                  Copy
+              </button>
+              <!-- <button commandfor="modal-box" command="request-close"> -->
+              <button id="btn-close-modal" type="button">
+                  Close
+              </button>
+          </div>
+      </dialog>
+  </form>
+  </main>
+</body>
+
+</html>
