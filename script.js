@@ -212,10 +212,28 @@ async function init() {
     }
 }
 
+function makeToast(msg) {
+    // https://github.com/mdn/dom-examples/blob/main/popover-api/toast-popovers/index.js
+    const popover = document.createElement("article");
+    popover.popover = "manual";
+    popover.classList.add("toast");
+    popover.textContent = msg;
+    document.body.appendChild(popover);
+
+    popover.showPopover();
+
+    // Remove message after 4 seconds
+    setTimeout(() => {
+        popover.hidePopover();
+        popover.remove();
+    }, 4000);
+}
+
 function copyToClipboard() {
     const textarea = document.getElementById("output");
     navigator.clipboard.writeText(textarea.value);
     console.log("Copied to clipboard: " + textarea.value);
+    makeToast("Copied!");
 }
 
 function createNewItem() {

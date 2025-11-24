@@ -38,6 +38,10 @@ input[type="number"] {
     height: 5vh;
 }
 
+#btn-copy {
+    cursor: copy;
+}
+
 #btn-show-modal {
   /* display: block; */
   /* width: 90vw; */
@@ -90,6 +94,12 @@ form {
   height: 2.0em;
 }
 
+:popover-open {
+  position: absolute;
+  inset: unset;
+  right: 5px;
+  bottom: 5px;
+}
 
 
 /* /\* Navigation Styles *\/ */
