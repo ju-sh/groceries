@@ -100,7 +100,7 @@ class ListView {
             heading_tr.classList.add("tbody-heading");
             tbody.id = cat;
             tbody.appendChild(heading_tr);
-            console.log(heading_tr);
+            //console.log(heading_tr);
 
             for (const item of this.cats[cat]) {
                 let itemDOM = item.createDOM();
@@ -201,11 +201,21 @@ async function init() {
         });
 
         const copyButton = document.getElementById("btn-copy");
+        copyButton.addEventListener("click", () => {
+	    copyToClipboard();
+        });
+        console.log("Init over");
 
 
     } catch (error) {
         console.error('Error using the JSON data:', error);
     }
+}
+
+function copyToClipboard() {
+    const textarea = document.getElementById("output");
+    navigator.clipboard.writeText(textarea.value);
+    console.log("Copied to clipboard: " + textarea.value);
 }
 
 function createNewItem() {
