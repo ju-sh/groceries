@@ -1,3 +1,6 @@
+// Time when data.json was last modified 
+const validFrom = 1764040174950
+
 class Item {
     constructor(id, name, cat, qty = 0, comment = "") {
         this.id = id;
@@ -53,34 +56,40 @@ class ListView {
      * items are like dictionaries indexed by string of category name
      * Value of each entry is an array of items belonging to that category.
      */
-    constructor(cats, cats_ctr) {
-        this.cats = cats;
-        this.cats_ctr = cats_ctr;
+    constructor(items) {
+        this.items = items;
+        // this.cats_ctr = cats_ctr;
+        // if("lastModified" in localStorage) {
+        //     this.lastModified = localStorage.;
+        // }{
+        //     this.lastModified = Date.now();
+        //     //localStorage.clear();
+        // }
     }
 
     static fromData(data) {
         try {
-            // Ctr for each category. To generate ids
-            let cats_ctr = {};
+	    // Current cat idx. To generate ids
+	    // Index 0 is for misc.
+            let catIdx = 1;
 
-            let cats = {};
+            // Counters for each category. To generate ids
+	    // Index corresponds to category
+	    let ctrs = [0];
 
-            for (const cat_data of data) {
-                cats_ctr[cat_data.name] = 0;
-                cats[cat_data.name] = [];
+            let items = [];
+            for (const catData of data) {
+                ctrs.push(0);
 
-                for (const item_name of cat_data.items) {
-                    let id_val = cat_data.name + "-" + cats_ctr[cat_data.name];
-                    cats_ctr[cat_data.name]++;
+                for (const itemName of catData.items) {
+                    let idVal = "c" + catIdx + "-" + "i" + ctrs[catIdx];
+                    ctrs[catIdx]++;
 
-                    let item = new Item(id_val, item_name, cat_data.name);
-                    cats[cat_data.name].push(item);
+                    let item = new Item(idVal, itemName, catData.name);
+                    items.push(item);
                 }
             }
-	    cats_ctr["മറ്റുള്ളവ"] = 0;
-	    cats["മറ്റുള്ളവ"] = [];
-
-            return new ListView(cats);
+            return new ListView(items);
 
         } catch (error) {
             console.error('Error loading data from json to variable:', error);
@@ -92,23 +101,23 @@ class ListView {
 
         for (let cat in this.cats) {
             let tbody = document.createElement('tbody');
-            let heading_tr = document.createElement('tr');
-            let heading_td = document.createElement('td');
-            heading_td.textContent = cat;
-            heading_td.colSpan = 4;
-            heading_tr.appendChild(heading_td);
-            heading_tr.classList.add("tbody-heading");
+            let headingTr = document.createElement('tr');
+            let headingTd = document.createElement('td');
+            headingTd.textContent = cat;
+            headingTd.colSpan = 4;
+            headingTr.appendChild(headingTd);
+            headingTr.classList.add("tbody-heading");
             tbody.id = cat;
-            tbody.appendChild(heading_tr);
+            tbody.appendChild(headingTr);
             //console.log(heading_tr);
 
             for (const item of this.cats[cat]) {
                 let itemDOM = item.createDOM();
                 tbody.appendChild(itemDOM)
             }
-            let spacer_tr = document.createElement('tr');
-	    spacer_tr.classList.add("spacer-row");
-            tbody.appendChild(spacer_tr);
+            let spacerTr = document.createElement('tr');
+	    spacerTr.classList.add("spacer-row");
+            tbody.appendChild(spacerTr);
             root.appendChild(tbody)
         }
         // let other_tbody = document.createElement('tbody');
@@ -124,11 +133,11 @@ class ListView {
         // root.appendChild(other_tbody)
 
         let form = document.getElementById("the-form");
-        let btn_other = document.createElement('button');
-	btn_other.innerText = "New item";
-	btn_other.id = "btn-new";
-	btn_other.type = "button";
-	form.appendChild(btn_other);
+        let btnOther = document.createElement('button');
+	btnOther.innerText = "New item";
+	btnOther.id = "btn-new";
+	btnOther.type = "button";
+	form.appendChild(btnOther);
 
     }
 }
