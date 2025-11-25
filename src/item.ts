@@ -68,9 +68,9 @@ function groupItemsByCategory(
 
     for(const item of items) { 
         if(item.cat in groupedItems) {
-            groupedItems[item.cat] = [item];
-        } else {
             groupedItems[item.cat].push(item);
+        } else {
+            groupedItems[item.cat] = [item];
         }
     }
     return groupedItems;

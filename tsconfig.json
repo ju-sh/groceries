@@ -5,7 +5,7 @@
     "outDir": "./dist",
     "target": "es6",
     "strict": true,
-    "module": "commonjs",
+    "module": "es6",
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*.ts"],

@@ -1,5 +1,5 @@
-import Item, { groupItemsByCategory } from "./item";
-import { FileData } from "./consts";
+import Item, { groupItemsByCategory } from "./item.js";
+import { FileData } from "./consts.js";
 
 interface DomElements {
     table: HTMLTableElement;

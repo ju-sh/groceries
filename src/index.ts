@@ -1,6 +1,6 @@
-import View from "./view";
-import { copyToClipboard, createNewItem, displayOutput } from "./utils";
-import { jsonPath, FileData } from "./consts";
+import View from "./view.js";
+import { copyToClipboard, createNewItem, displayOutput } from "./utils.js";
+import { jsonPath, FileData } from "./consts.js";
 
 async function getJSON(
     filename: string = jsonPath

@@ -1,5 +1,5 @@
-import Item from "./item";
-import View from "./view";
+import Item from "./item.js";
+import View from "./view.js";
 import { jsonPath, FileData } from "./consts";
 
 interface DomElements {
