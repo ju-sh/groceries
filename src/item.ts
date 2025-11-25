@@ -9,25 +9,13 @@ interface DomElements {
 }
 
 class Item {
-    // id: string;
-    // name: string;
-    // cat: string;
-    // qty: number;
-    // comment: string;
-
     constructor(
         public id: string,
         public name: string,
         public cat: string,
         public qty: number = 0,
         public comment: string = ""
-    ) {
-        this.id = id;
-        this.name = name;
-        this.cat = cat;
-        this.comment = comment;
-        this.qty = qty;
-    }
+    ) {}
 
     createDOM() {
         const dom: DomElements = {};
@@ -47,10 +35,10 @@ class Item {
         dom.input["comment"] = document.createElement("input");
     
         dom.input["checkbox"].type = "checkbox";
-        dom.input["checkbox"].id = this.id;
+        dom.input["checkbox"].id = "cb-" + this.id;
         dom.input["checkbox"].classList.add("checkbox");
       
-        dom.label["name"].setAttribute('for', this.id);
+        dom.label["name"].setAttribute("for", "cb-" + this.id);
         dom.label["name"].textContent = this.name;
         dom.input["comment"].placeholder = "Comment"; 
         dom.input["comment"].type = "text"; 
@@ -72,9 +60,23 @@ class Item {
     }
 }
 
+function groupItemsByCategory(
+    items: Item[]
+): {[category: string]: Item[]} {
+    const groupedItems: {[category: string]: Item[]} = {};
+
+    for(const item of items) { 
+        if(item.cat in groupedItems) {
+            groupedItems[item.cat] = [item];
+        } else {
+            groupedItems[item.cat].push(item);
+        }
+    }
+    return groupedItems;
+}
 
 // // Named exports
-// export { fun_name };
+export { groupItemsByCategory };
 
 // Default export
 export default Item;
