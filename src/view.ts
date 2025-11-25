@@ -22,33 +22,28 @@ class View {
         // }
     }
 
-    static fromData(data: FileData[]) {
-        try {
-	    // Current cat idx. To generate ids
-	    // Index 0 is for misc.
-            let catIdx = 1;
+    static fromData(data: FileData[]): View {
+        // Current cat idx. To generate ids
+        // Index 0 is for misc.
+        let catIdx = 1;
 
-            // Counters for each category. To generate ids
-	    // Index corresponds to category
-	    let ctrs = [0];
+        // Counters for each category. To generate ids
+        // Index corresponds to category
+        let ctrs = [0];
 
-            let items = [];
-            for (const catData of data) {
-                ctrs.push(0);
+        let items = [];
+        for (const catData of data) {
+            ctrs.push(0);
 
-                for (const itemName of catData.items) {
-                    let idVal = "c" + catIdx + "-" + "i" + ctrs[catIdx];
-                    ctrs[catIdx]++;
+            for (const itemName of catData.items) {
+                let idVal = "c" + catIdx + "-" + "i" + ctrs[catIdx];
+                ctrs[catIdx]++;
 
-                    let item = new Item(idVal, itemName, catData.category);
-                    items.push(item);
-                }
+                let item = new Item(idVal, itemName, catData.category);
+                items.push(item);
             }
-            return new View(items);
-
-        } catch (error) {
-            console.error('Error loading data from json to variable:', error);
         }
+        return new View(items);
     }
 
     createDOM() {
@@ -74,7 +69,7 @@ class View {
         dom.button = {};
 
         const groupedItems: {[category: string]: Item[]} =
-	    groupItemsByCategory(this.items);
+        groupItemsByCategory(this.items);
 
         for (const cat in groupedItems) {
             dom.tbody["tbody"] = document.createElement('tbody');
@@ -93,16 +88,16 @@ class View {
                 dom.tbody["tbody"].appendChild(itemDOM)
             }
             dom.tr["spacer"] = document.createElement('tr');
-	    dom.tr["spacer"].classList.add("spacer-row");
+            dom.tr["spacer"].classList.add("spacer-row");
             dom.tbody["tbody"].appendChild(dom.tr["spacer"]);
             dom.table.appendChild(dom.tbody["tbody"])
         }
 
         dom.button["new"] = document.createElement("button");
-	dom.button["new"].innerText = "New item";
-	dom.button["new"].id = "btn-new";
-	dom.button["new"].type = "button";
-	dom.form.appendChild(dom.button["new"]);
+        dom.button["new"].innerText = "New item";
+        dom.button["new"].id = "btn-new";
+        dom.button["new"].type = "button";
+        dom.form.appendChild(dom.button["new"]);
     }
 }
 

@@ -13,7 +13,8 @@ class Item {
         public id: string,
         public name: string,
         public cat: string,
-        public qty: number = 0,
+        public qty: string = "0",
+        // public qty: number = 0,
         public comment: string = ""
     ) {}
 

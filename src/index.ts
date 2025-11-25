@@ -119,7 +119,6 @@ async function init() {
             }
         }
 
-
         console.log("Init over");
     } catch (error) {
         console.error('Error using the JSON data:', error);
